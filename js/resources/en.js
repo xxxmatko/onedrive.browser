@@ -1,7 +1,8 @@
 define([], function () {
     return {
         translation: {
-            "connect": "Connect"
+            "connect": "Connect",
+            "connecting": "... connecting"
         }
     };
 });

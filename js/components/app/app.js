@@ -1,6 +1,7 @@
 define([
-    "text!./app.html"
-], function (view) {
+    "text!./app.html",
+    "knockout"
+], function (view, ko) {
     //#region [ Fields ]
 
     var global = (function() { return this; })();
@@ -19,6 +20,7 @@ define([
         console.log("App()");
 
         this.lang = args.lang;
+        this.isConnecting = ko.observable(false);
     };
 
     //#endregion
@@ -26,6 +28,15 @@ define([
 
     //#region [ Methods : Public ]
     
+    /**
+     * Connects to OneDrive.
+     */
+    Model.prototype.connect = function() {
+        this.isConnecting(true);
+        console.info("connect");
+    };
+
+
     /**
      * Dispose.
      */

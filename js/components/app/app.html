@@ -1,9 +1,9 @@
 <figure class="app container">
     <div class="row center">
         <div class="col s12">
-            <button class="btn btn-large blue">
+            <button class="btn btn-large blue" data-bind="click: connect, disable: isConnecting">
                 <i class="appicons left">onedrive</i>
-                <span data-bind="i18n: 'connect'"></span>
+                <span data-bind="i18n: !isConnecting() ? 'connect' : 'connecting'"></span>
             </button>
         </div>
     </div>
