@@ -1,9 +1,7 @@
 define([
-    "resources/sk",
     "resources/en"
-], function (sk, en) {
+], function (en) {
     return {
-        sk: sk,
         en: en
     };
 });
