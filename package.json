@@ -1,0 +1,28 @@
+{
+    "version": "1.0.0",
+    "name": "boilerplate-knockout",
+    "private": true,
+    "homepage": "http://localhost:8020/",
+    "devDependencies": {
+        "grunt": "1.0.3",
+        "grunt-contrib-clean": "2.0.0",
+        "grunt-contrib-copy": "1.0.0",
+        "grunt-rename-util": "1.0.0",
+        "grunt-contrib-jshint": "2.0.0",
+        "grunt-webfont": "1.7.2",
+        "grunt-contrib-less": "2.0.0",
+        "grunt-contrib-csslint": "2.0.0",
+        "grunt-contrib-concat": "1.0.1",
+        "grunt-contrib-cssmin": "3.0.0",
+        "grunt-contrib-requirejs": "1.0.0"
+    },
+    "dependencies": {
+        "jquery": "3.3.1",
+        "materialize-css": "1.0.0",
+        "requirejs": "2.3.6",
+        "requirejs-text": "2.0.15",
+        "knockout": "3.5.0",
+        "knockout.validation": "2.0.3",
+        "i18next": "15.0.4"
+    }
+}

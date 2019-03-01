@@ -1,0 +1,20 @@
+{
+    "files.exclude": {
+        "LICENSE": true,
+        "README.md": true,
+        ".vscode": true,
+        "node_modules": true,
+        "wwwroot": true,
+        ".gitignore": true
+    },
+    "build": {
+        "iisexpress": "C:/Program Files (x86)/IIS Express/iisexpress.exe",
+        "browser": "C:/Program Files (x86)/Mozilla Firefox/firefox.exe",
+        "debug": {
+            "port": 8020
+        },
+        "release": {
+            "port": 8021
+        }
+    }
+}

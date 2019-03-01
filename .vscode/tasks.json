@@ -1,0 +1,123 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "restore",
+            "type": "npm",
+            "script": "install",
+            "group": "build",
+            "presentation": {
+				"panel": "new"
+			},
+            "problemMatcher": []
+        },
+        {
+            "label": "build:Debug",
+            "type": "shell",
+            "windows": {
+                "command": "grunt"
+            },
+            "args": [
+                "--gruntfile",
+                "'gruntfile.js'",
+                "app-build:Debug",
+                "--color"
+            ],
+            "group": "build",
+            "presentation": {
+				"panel": "new"
+			},
+            "problemMatcher": []
+        },
+        {
+            "label": "iis:Debug",
+            "type": "shell",
+            "windows": {
+                "command": "${config:build.iisexpress}"
+            },
+            "args": [
+                "/path:\"${workspaceFolder}\\wwwroot\"",
+                "/port:${config:build.debug.port}"
+            ],
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "browse:Debug",
+            "type": "shell",
+            "windows": {
+                "command": "${config:build.browser}"
+            },
+            "args": [
+                "http://localhost:${config:build.debug.port}"
+            ],
+            "presentation": {
+                "reveal": "never"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "launch:Debug",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": [],
+            "dependsOn": ["iis:Debug", "browse:Debug"]
+        },
+        {
+            "label": "build:Release",
+            "type": "shell",
+            "windows": {
+                "command": "grunt"
+            },
+            "args": [
+                "--gruntfile",
+                "'gruntfile.js'",
+                "app-build:Release",
+                "--color"
+            ],
+            "group": "build",
+            "presentation": {
+				"panel": "new"
+			},
+            "problemMatcher": []
+        },
+        {
+            "label": "iis:Release",
+            "type": "shell",
+            "windows": {
+                "command": "${config:build.iisexpress}"
+            },
+            "args": [
+                "/path:\"${workspaceFolder}\\wwwroot\"",
+                "/port:${config:build.release.port}"
+            ],
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "browse:Release",
+            "type": "shell",
+            "windows": {
+                "command": "${config:build.browser}"
+            },
+            "args": [
+                "http://localhost:${config:build.release.port}"
+            ],
+            "presentation": {
+                "reveal": "never"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "launch:Release",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": [],
+            "dependsOn": ["iis:Release", "browse:Release"]
+        },        
+    ]
+}
