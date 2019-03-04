@@ -1,10 +1,13 @@
 define([
     "text!./app.html",
-    "knockout"
-], function (view, ko) {
+    "module",
+    "knockout",
+    "my/odauth"
+], function (view, module, ko, api) {
     //#region [ Fields ]
 
     var global = (function() { return this; })();
+    var cnf = module.config();
 
     //#endregion
     
@@ -21,6 +24,25 @@ define([
 
         this.lang = args.lang;
         this.isConnecting = ko.observable(false);
+        this.isConnected = ko.observable(false);
+    };
+
+    //#endregion
+
+
+    //#region [ Event Handlers ]
+
+    /**
+     * Event handler for the init event.
+     */
+    Model.prototype._onInit = function() {
+        if(!api.isSignedIn) {
+            api.signIn().then(this._onInit.bind(this));
+            return;
+        }
+
+        this.isConnecting(false);
+        this.isConnected(true);
     };
 
     //#endregion
@@ -33,7 +55,15 @@ define([
      */
     Model.prototype.connect = function() {
         this.isConnecting(true);
-        console.info("connect");
+        this.isConnected(false);
+        
+        api.init({
+            origin: cnf.origin,
+            clientId: cnf.clientId,
+            redirectUri: cnf.redirectUri,
+            scopes: cnf.scopes.join(" "),
+            authServiceUri: cnf.authServiceUri
+        }).then(this._onInit.bind(this));
     };
 
 

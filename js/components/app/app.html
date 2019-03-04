@@ -1,4 +1,5 @@
 <figure class="app container">
+    <!-- ko if: !isConnected() -->
     <div class="row center">
         <div class="col s12">
             <button class="btn btn-large blue" data-bind="click: connect, disable: isConnecting">
@@ -7,4 +8,5 @@
             </button>
         </div>
     </div>
+    <!-- /ko -->
 </figure>
