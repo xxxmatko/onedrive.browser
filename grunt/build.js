@@ -34,7 +34,8 @@ module.exports = function (grunt) {
             "csslint",
             "concat:css",
             "clean:css",
-            "copy:index"
+            "copy:index",
+            "copy:callback"
         ];
 
         // Set up dynamic parameters

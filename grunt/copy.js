@@ -111,7 +111,24 @@ module.exports = function (grunt) {
                     return "wwwroot/index.html";
                 }
             }]
-        }        
+        },
+        callback: {
+            options: {
+                process: function (content, srcpath) {
+                    return content
+                        .replace(/\{version\}/g, grunt.config("package").version)
+                        .replace(/\{homepage\}/g, grunt.config("homepage"))
+                        .replace(/\{cacheBust\}/g, new Date().getTime());
+                }
+            },
+            files: [{
+                expand: true,
+                src: ["callback.<%= configuration %>.html"],
+                rename: function () {
+                    return "wwwroot/callback.html";
+                }
+            }]
+        }
     });
 
     //#endregion
