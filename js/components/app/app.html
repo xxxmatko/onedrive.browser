@@ -17,5 +17,14 @@
             </button>            
         </div>
     </div>
-    <!-- /ko -->    
+    <!-- /ko -->
+    <!-- ko if: files().length -->
+    <div class="row">
+        <div class="col s12">
+            <ul class="collection" data-bind="foreach: files">
+                <li class="collection-item" data-bind="text: name"></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /ko -->
 </figure>

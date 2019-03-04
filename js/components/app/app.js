@@ -94,7 +94,7 @@ define([
             return;
         }
 
-        var driveId = "";
+        var $this = this;
 
         $.ajax({
             url: cnf.apiUrl + "me/drives",
@@ -127,7 +127,9 @@ define([
                 accept: "application/json;odata.metadata=none"
             });
         }).then(function(data) {
-            debugger;
+            data.value.forEach(function(f) {
+                $this.files.push(f);
+            });
         }).catch(function(ex) {
             console.error("App : listFiles() : ", ex);
         });
