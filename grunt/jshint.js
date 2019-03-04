@@ -17,7 +17,8 @@ module.exports = function (grunt) {
                 DateFormat: true,
                 Waves: true,
                 jQuery: true,
-                Promise: true
+                Promise: true,
+                self: true
             }
         },
         src: [
