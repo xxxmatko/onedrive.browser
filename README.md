@@ -22,3 +22,9 @@ Simple browser application that makes requests to the OneDrive API.
 1. Click **Ok** and if you haven't already done it, save your application.
 
 ## Run the sample
+1. Download the source code of this repository.
+1. Open the folder with [Visual Studio Code](https://code.visualstudio.com/).
+1. In order to build the project install [node.js](https://nodejs.org/en/).
+1. Run the `restore` task by pressing `Ctrl + Shift + B` and choose `restore`.
+1. To build the application run the `build:Debug` task by pressing `Ctrl + Shift + B` and choose `build:Debug`.
+1. Run the application by pressing `Ctrl + Shift + B` and choose `launch:Debug`.
