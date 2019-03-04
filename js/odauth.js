@@ -61,6 +61,7 @@
             return;
         }
 
+        this.token = "";
         this.isSignedIn = false;
         resolve(this);
     };
@@ -100,9 +101,25 @@
                 return;
             }
             popup.close();
+            
+            this.token = e.data.token;
             this.isSignedIn = true;
             resolve(this);
         }).bind(this), { capture: false, once: false });
+    };
+
+
+    /**
+     * Sign out function.
+     * 
+     * @param {function} resolve Function to resolve the promise.
+     * @param {function} reject Function to reject the promise.
+     */
+    Model.prototype._signOut = function(resolve, reject) {
+        this._clearCookie();
+        this.token = "";
+        this.isSignedIn = false;
+        resolve(this);
     };
 
 
@@ -181,7 +198,17 @@
         }
       
         doc.cookie = cookie;
-    };    
+    };
+
+
+    /**
+     * Clears cookie.
+     */
+    Model.prototype._clearCookie = function() {
+        var expiration = new Date();
+        var cookie = "odauth=; path=/; expires=" + expiration.toUTCString();
+        doc.cookie = cookie;
+    };
 
     //#endregion
 
@@ -221,6 +248,14 @@
      */
     Model.prototype.signIn = function() {
         return new Promise(this._signIn.bind(this));
+    };
+
+
+    /**
+     * Signs out.
+     */
+    Model.prototype.signOut = function() {
+        return new Promise(this._signOut.bind(this));
     };
 
 

@@ -45,6 +45,15 @@ define([
         this.isConnected(true);
     };
 
+
+    /**
+     * Event handler for the disconnect event.
+     */
+    Model.prototype._onDisconnect = function() {
+        this.isConnecting(false);
+        this.isConnected(false);
+    };
+
     //#endregion
 
 
@@ -64,6 +73,14 @@ define([
             scopes: cnf.scopes.join(" "),
             authServiceUri: cnf.authServiceUri
         }).then(this._onInit.bind(this));
+    };
+
+
+    /**
+     * Disconnects from OneDrive.
+     */
+    Model.prototype.disconnect = function() {
+        api.signOut().then(this._onDisconnect.bind(this));
     };
 
 
