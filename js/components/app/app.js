@@ -2,8 +2,9 @@ define([
     "text!./app.html",
     "module",
     "knockout",
+    "jquery",
     "my/odauth"
-], function (view, module, ko, api) {
+], function (view, module, ko, $, api) {
     //#region [ Fields ]
 
     var global = (function() { return this; })();
@@ -25,6 +26,7 @@ define([
         this.lang = args.lang;
         this.isConnecting = ko.observable(false);
         this.isConnected = ko.observable(false);
+        this.files = ko.observableArray([]);
     };
 
     //#endregion
@@ -43,6 +45,7 @@ define([
 
         this.isConnecting(false);
         this.isConnected(true);
+        this.listFiles();
     };
 
 
@@ -82,6 +85,53 @@ define([
     Model.prototype.disconnect = function() {
         api.signOut().then(this._onDisconnect.bind(this));
     };
+
+    /**
+	 * Lists files.
+	 */
+    Model.prototype.listFiles = function () {
+        if(!this.isConnected()) {
+            return;
+        }
+
+        var driveId = "";
+
+        $.ajax({
+            url: cnf.apiUrl + "me/drives",
+            dataType: "json",
+            headers: {
+                "Authorization": "Bearer " + api.token
+            },
+            accept: "application/json;odata.metadata=none"
+        }).then(function(data) {
+            if(!data) {
+                return "";
+            }
+
+            if ((data.value instanceof Array) && data.value.length) {
+                return data.value[0].id;
+            }
+
+            return "";
+        }).then(function(data) {
+            if(!data) {
+                throw "Unable to get drive id.";
+            }
+            
+            return $.ajax({
+                url: cnf.apiUrl + "drives/" + data + "/root/children?expand=thumbnails",
+                dataType: "json",
+                headers: {
+                    "Authorization": "Bearer " + api.token
+                },
+                accept: "application/json;odata.metadata=none"
+            });
+        }).then(function(data) {
+            debugger;
+        }).catch(function(ex) {
+            console.error("App : listFiles() : ", ex);
+        });
+    }; 
 
 
     /**

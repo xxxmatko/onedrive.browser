@@ -20,6 +20,7 @@ require({
             language: (window.location.href.indexOf("lang=") !== -1) ? window.location.href.split("lang=")[1].substr(0, 2) : document.documentElement.lang || "en"
         },
         "my/components/app/app": {
+            apiUrl: "https://graph.microsoft.com/v1.0/",
             origin: "http://localhost:8020",
             clientId: "0e68d12f-a492-487b-8916-4ff9f0493f37",
             redirectUri: "http://localhost:8020/callback.html",
