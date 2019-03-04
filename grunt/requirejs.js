@@ -39,6 +39,7 @@ module.exports = function (grunt) {
                     create: true,
                     stubModules: ["text"],
                     exclude: [
+                        "my/odauth"
                     ],
                     include: [
                         "requirejs",
