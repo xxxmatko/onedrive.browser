@@ -60,6 +60,37 @@ define([
     //#endregion
 
 
+    //#region [ Methods : Private ]
+
+    /**
+     * Gets formated size.
+     * 
+     * @param {number} size Size in bytes.
+     */
+    Model.prototype._size = function(size) {
+        if(typeof(size) === "undefined") {
+            return "";
+        }
+
+        var s = parseInt(size);
+        var unit = " B";
+
+        if((s / 1024) > 1) {
+            unit = " KB";
+            s = s / 1024;
+        }
+
+        if((s / 1024) > 1) {
+            unit = " MB";
+            s = s / 1024;
+        }
+        
+        return s.toFixed(2) + unit;
+    };
+
+    //#endregion
+
+
     //#region [ Methods : Public ]
     
     /**
@@ -118,6 +149,7 @@ define([
                 throw "Unable to get drive id.";
             }
             
+            // Get my files
             return $.ajax({
                 url: cnf.apiUrl + "drives/" + data + "/root/children?expand=thumbnails",
                 dataType: "json",
@@ -130,10 +162,35 @@ define([
             data.value.forEach(function(f) {
                 $this.files.push(f);
             });
-        }).catch(function(ex) {
+
+            // Get files shared with me
+            return $.ajax({
+                url: cnf.apiUrl + "me/drive/sharedWithMe?expand=thumbnails",
+                dataType: "json",
+                headers: {
+                    "Authorization": "Bearer " + api.token
+                },
+                accept: "application/json;odata.metadata=none"
+            });
+        }).then(function(data) {
+            data.value.forEach(function(f) {
+                $this.files.push(f);
+            });
+        })
+        .catch(function(ex) {
             console.error("App : listFiles() : ", ex);
         });
     }; 
+
+
+    /**
+     * Downloads file.
+     * 
+     * @param {object} f File to download.
+     */
+    Model.prototype.downloadFile = function(f) {
+        console.info(f);
+    };
 
 
     /**
