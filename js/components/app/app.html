@@ -9,4 +9,13 @@
         </div>
     </div>
     <!-- /ko -->
+    <!-- ko if: isConnected() -->
+    <div class="row center">
+        <div class="col s12">
+            <button class="btn btn-large red" data-bind="click: disconnect">
+                Sign out
+            </button>            
+        </div>
+    </div>
+    <!-- /ko -->    
 </figure>
